@@ -3,12 +3,12 @@ stages:
 
 
 include:
-  - ./pipelines/template.yaml
+  - ./pipelines/template.yml
 
 one_var:
   extends: .build-template
   variables:
     TEST_ENV: "production"
-    
+
 no_var:
   extends: .build-template
