@@ -4,3 +4,11 @@ stages:
 
 include:
   - ./pipelines/template.yaml
+
+one_var:
+  extends: .build-template
+  variables:
+    TEST_ENV: "production"
+    
+no_var:
+  extends: .build-template
