@@ -10,10 +10,10 @@ no_var:
 one_var:
   extends: .build-job
   variables:
-    TEST_ENV: "production"
+    TEST_ENV: "I will print only once"
 
 two_var:
   extends: .build-job
   variables:
-    TEST_ENV: "development"
+    TEST_ENV: "I will print and go inside if statement"
     RUN_SCRIPT: "true"
