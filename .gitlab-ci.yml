@@ -1,14 +1,19 @@
 stages:
 - build
 
-
 include:
   - pipelines/template.yml
 
+no_var:
+  extends: .build-job
+  
 one_var:
   extends: .build-job
   variables:
     TEST_ENV: "production"
 
-no_var:
+two_var:
   extends: .build-job
+  variables:
+    TEST_ENV: "production"
+    RUN_SCRIPT: "true"
