@@ -1,5 +1,5 @@
 
-build-job:       # This job runs in the build stage, which runs first.
+.build-job:       # This job runs in the build stage, which runs first.
   stage: build
   variables:
     TEST_ENV: "AAAAAAAAAAAAAA"
