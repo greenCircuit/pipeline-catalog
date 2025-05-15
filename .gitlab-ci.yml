@@ -3,7 +3,7 @@ stages:
 
 
 include:
-  - ./pipelines/template.yml
+  - pipelines/template.yml
 
 # one_var:
 #   extends: .build-template
