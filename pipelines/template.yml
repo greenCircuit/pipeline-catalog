@@ -2,7 +2,13 @@
 .build-job:       # This job runs in the build stage, which runs first.
   stage: build
   variables:
-    TEST_ENV: "AAAAAAAAAAAAAA"
+    TEST_ENV: "no overrides were provided"
+    RUN_SCRIPT: "false"
   image: docker.io/alpine:latest
-  script:
-    - echo ${TEST_ENV}
+  script: |
+    echo ${TEST_ENV}
+    echo ${RUN_SCRIPT}
+    if [[ ${RUN_SCRIPT} == "true" ]]; then 
+      echo "Doing some additional stuff"
+    fi
+    
