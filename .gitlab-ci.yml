@@ -5,10 +5,10 @@ stages:
 include:
   - ./pipelines/template.yml
 
-one_var:
-  extends: .build-template
-  variables:
-    TEST_ENV: "production"
+# one_var:
+#   extends: .build-template
+#   variables:
+#     TEST_ENV: "production"
 
-no_var:
-  extends: .build-template
+# no_var:
+#   extends: .build-template
