@@ -6,9 +6,9 @@ include:
   - pipelines/template.yml
 
 one_var:
-  extends: .build-template
+  extends: .build-job
   variables:
     TEST_ENV: "production"
 
 no_var:
-  extends: .build-template
+  extends: .build-job
