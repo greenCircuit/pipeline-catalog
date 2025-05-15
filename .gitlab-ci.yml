@@ -15,5 +15,5 @@ one_var:
 two_var:
   extends: .build-job
   variables:
-    TEST_ENV: "production"
+    TEST_ENV: "development"
     RUN_SCRIPT: "true"
