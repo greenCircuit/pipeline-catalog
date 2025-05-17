@@ -1,6 +1,6 @@
 include:
   - pipelines/defaults/stages.yaml
-  - pipelines/imgs/buildImg.yaml
+  - pipelines/imgs/podman.yaml
   - pipelines/template.yml
 
 # running all pipelines in order to validate them
