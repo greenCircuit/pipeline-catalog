@@ -1,4 +1,4 @@
-create_image:
+.create_image:
   stage: build
   image: quay.io/podman/stable:latest
   script: |
