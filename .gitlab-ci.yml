@@ -2,16 +2,10 @@ stages:
 - build
 
 include:
+  - pipelines/defaults/stages.yaml
   - pipelines/template.yml
 
-no_var:
-  extends: .build-job
-  
-one_var:
-  extends: .build-job
-  variables:
-    TEST_ENV: "I will print only once"
-
+# running all pipelines in order to validate them
 two_var:
   extends: .build-job
   variables:
