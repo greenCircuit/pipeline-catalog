@@ -1,6 +1,7 @@
 .create_image:
   image: quay.io/podman/stable:latest
   script: |
+    whoami
     if [ "$CI_COMMIT_REF_NAME" = "$CI_DEFAULT_BRANCH" ]; then
       TAG="latest"
     else
