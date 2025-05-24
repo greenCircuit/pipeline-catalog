@@ -7,6 +7,7 @@
     git config --global user.email ${GITLAB_USER_EMAIL}
     git config --global user.name  ${CI_COMMIT_AUTHOR}
     git branch
+    git log
     git remote add gitlab_ci "http://GIT_REPO_TOKEN@:{GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
     echo "## ${version}  ${CI_COMMIT_TIMESTAMP}" >> CHANGELOG.md
     echo "- ${CI_COMMIT_MESSAGE}" >> CHANGELOG.md
