@@ -9,11 +9,5 @@ include:
 podman:
   extends: .create_image
 
-two_var:
-  extends: .build-job
-  variables:
-    TEST_ENV: "I will print and go inside if statement"
-    RUN_SCRIPT: "true"
-
 git_leaks:
   extends: .secrets_scan
