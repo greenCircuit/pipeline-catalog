@@ -9,5 +9,8 @@ include:
 podman:
   extends: .create_image
 
-git_leaks:
+git-leaks:
   extends: .secrets_scan
+
+create-changelog:
+  extends: .changelog

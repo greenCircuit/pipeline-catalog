@@ -1,4 +1,11 @@
-FROM quay.io/podman/stable:latest
+FROM docker.io/alpine:latest 
+RUN apk add podman \
+            fuse-overlaysfs \
+            yq \
+            jq \
+            bash \
+            git \ 
+
 
 # Create the insecure registry config
 RUN mkdir -p /etc/containers && \
