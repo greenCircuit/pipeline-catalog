@@ -29,4 +29,5 @@
     git remote add gitlab_ci "http://GIT_REPO_TOKEN:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
     git tag -a ${GIT_TAG} -m "ci repo tag"
     git push gitlab_ci --tags -o ci.skip
+    
 
