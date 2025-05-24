@@ -1,0 +1,5 @@
+.changelog:
+  image: docker.io/git:latest
+  script: |
+    echo "changing something"
+
