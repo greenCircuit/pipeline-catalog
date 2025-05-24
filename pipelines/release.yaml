@@ -10,10 +10,12 @@
     git checkout ${CI_COMMIT_BRANCH}
     git branch
     git remote add gitlab_pipeline "https://GIT_REPO_TOKEN:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
+    echo "<br>" >> CHANGELOG.md
     echo "## ${version} - ${CI_COMMIT_TIMESTAMP}" >> CHANGELOG.md
     echo "- Message:${CI_COMMIT_MESSAGE}" >> CHANGELOG.md
     echo "- Commit URL: http://gitlab.dev.local/${CI_PROJECT_PATH}$/-/tree/${CI_COMMIT_SHA}" >> CHANGELOG.md
     echo "- Pipeline: ${CI_PIPELINE_URL}" >> CHANGELOG.md
+    echo "<br>" >> CHANGELOG.md
     cat CHANGELOG.md
     git add CHANGELOG.md
     git commit -m "automated change log"
@@ -24,7 +26,7 @@
   image: registry.dev.local/homelab/pipeline-catalog:latest
   stage: release
   variables:
-    GIT_TAG: ""
+    GIT_TAG: "0.0.1"
   script: | # shell
     git config --global user.email ${CI_COMMIT_AUTHOR}
     git config --global user.name  ${GITLAB_USER_NAME}
