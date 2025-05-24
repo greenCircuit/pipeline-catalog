@@ -4,12 +4,14 @@
   variables:
     version: "0.0.1"
   script: | # shell
-    git config --global user.email ${CI_COMMIT_AUTHOR}
-    git config --global user.name  ${GITLAB_USER_NAME}
+    git config --global user.email ${GITLAB_USER_EMAIL}
+    git config --global user.name  ${CI_COMMIT_AUTHOR}
+    git branch
     git remote add gitlab_ci "http://GIT_REPO_TOKEN@:{GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
     echo "## ${version}  ${CI_COMMIT_TIMESTAMP}" >> CHANGELOG.md
     echo "- ${CI_COMMIT_MESSAGE}" >> CHANGELOG.md
     echo "- ${CI_COMMIT_SHA}" >> CHANGELOG.md
+    cat CHANGELOG.md
     git add CHANGELOG.md
     git commit -m "automated change log"
     git push gitlab_ci -o ci.skip
