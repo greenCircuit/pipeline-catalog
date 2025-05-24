@@ -8,7 +8,7 @@
     git config --global user.name  ${CI_COMMIT_AUTHOR}
     git checkout ${CI_COMMIT_BRANCH}
     git branch
-    git remote add gitlab_pipeline "http://GIT_REPO_TOKEN@:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
+    git remote add gitlab_pipeline "http://GIT_REPO_TOKEN:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
     echo "## ${version}  ${CI_COMMIT_TIMESTAMP}" >> CHANGELOG.md
     echo "- Message:   ${CI_COMMIT_MESSAGE}" >> CHANGELOG.md
     echo "- Commit URL:   <gitlab.dev.local/${CI_PROJECT_PATH}$/-/tree/${CI_COMMIT_SHA}>" >> CHANGELOG.md
@@ -26,7 +26,7 @@
   script: | # shell
     git config --global user.email ${CI_COMMIT_AUTHOR}
     git config --global user.name  ${GITLAB_USER_NAME}
-    git remote add gitlab_ci "http://GIT_REPO_TOKEN@:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
+    git remote add gitlab_ci "http://GIT_REPO_TOKEN:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
     git tag -a ${GIT_TAG} -m "ci repo tag"
     git push gitlab_ci --tags -o ci.skip
 
