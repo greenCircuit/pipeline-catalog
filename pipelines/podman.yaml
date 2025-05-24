@@ -1,6 +1,6 @@
 .create_image:
   image: registry.dev.local/homelab/pipeline-catalog:latest
-  script: |
+  script: | # bash
     if [ "$CI_COMMIT_REF_NAME" = "$CI_DEFAULT_BRANCH" ]; then
       TAG="latest"
     else
@@ -8,5 +8,5 @@
     fi
     echo "IMG tag:  ${TAG}"
     podman login $CI_REGISTRY_IMAGE -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-    podman build -t ${$CI_REGISTRY_IMAGE}:${TAG}
-    podman push ${$CI_REGISTRY_IMAGE}:${TAG}
+    podman build -t "${$CI_REGISTRY_IMAGE}:${TAG}"
+    podman push "${$CI_REGISTRY_IMAGE}:${TAG}"
