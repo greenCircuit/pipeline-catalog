@@ -19,6 +19,7 @@
     git commit -m "automated change log"
     git push gitlab_pipeline -o ci.skip
 
+
 .create-tag:
   image: registry.dev.local/homelab/pipeline-catalog:latest
   stage: release
