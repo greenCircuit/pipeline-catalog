@@ -1,10 +1,11 @@
 FROM docker.io/alpine:latest 
 RUN apk add podman \
-            fuse-overlaysfs \
+            fuse-overlayfs \
             yq \
             jq \
-            bash \
-            git \ 
+            bash \ 
+            wget \
+            git 
 
 
 # Create the insecure registry config
