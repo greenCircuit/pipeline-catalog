@@ -10,3 +10,6 @@
     podman login $CI_REGISTRY_IMAGE -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     podman build -t ${CI_REGISTRY_IMAGE}:${TAG} .
     podman push ${CI_REGISTRY_IMAGE}:${TAG}
+  only:
+    changes:
+      - Dockerfile
