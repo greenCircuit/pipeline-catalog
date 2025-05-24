@@ -12,8 +12,8 @@
     git remote add gitlab_pipeline "https://GIT_REPO_TOKEN:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
     echo "<br>" >> CHANGELOG.md
     echo "## ${version} - ${CI_COMMIT_TIMESTAMP}" >> CHANGELOG.md
-    echo "- Message:${CI_COMMIT_MESSAGE}" >> CHANGELOG.md
-    echo "- Commit URL: http://gitlab.dev.local/${CI_PROJECT_PATH}$/-/tree/${CI_COMMIT_SHA}" >> CHANGELOG.md
+    echo "${CI_COMMIT_MESSAGE}" >> CHANGELOG.md
+    echo "- Commit URL: http://gitlab.dev.local/${CI_PROJECT_PATH}/-/tree/${CI_COMMIT_SHA}" >> CHANGELOG.md
     echo "- Pipeline: ${CI_PIPELINE_URL}" >> CHANGELOG.md
     echo "<br>" >> CHANGELOG.md
     cat CHANGELOG.md
