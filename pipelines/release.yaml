@@ -1,5 +1,6 @@
 .changelog:
   image: registry.dev.local/homelab/pipeline-catalog:latest
+  stage: release
   variables:
     version: "0.0.1"
   script: | # shell
