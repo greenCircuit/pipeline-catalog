@@ -38,5 +38,7 @@
 .make-semver:
   image: registry.dev.local/homelab/pipeline-catalog:latest
   stage: release
-  script: | # shell
-    scripts/getSemver.sh
+  script: |
+    echo Hello
+    ls scripts/
+    cat scripts/getSemver.sh
