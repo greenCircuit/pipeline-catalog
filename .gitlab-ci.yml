@@ -16,6 +16,9 @@ podman:
 git-leaks:
   extends: .secrets_scan
 
+semver:
+  extends: .make-semver
+
 create-changelog:
   extends: .changelog
   rules:

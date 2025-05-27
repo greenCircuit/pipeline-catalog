@@ -35,3 +35,8 @@
     git push gitlab_ci --tags -o ci.skip
 
 
+.make-semver:
+  image: registry.dev.local/homelab/pipeline-catalog:latest
+  stage: release
+  script: | # shell
+    ./scripts/getSemver.sh
