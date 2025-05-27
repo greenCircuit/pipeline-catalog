@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Exit script if command fails or uninitialized variables used
-set -euo pipefail
+# set -euo pipefail
 # GLOBAL VARS
 UPDATE_SEMVER="false"
 
