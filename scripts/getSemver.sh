@@ -19,7 +19,7 @@ else
 fi
 
 # not update semver if not default branch
-if [[ "$(git branch)" != ${CI_DEFAULT_BRANCH} ]]; then
+if [[ "$(git branch)" != "${CI_DEFAULT_BRANCH}" ]]; then
     echo "Not updating semver,not on default branch"
     exit 0
 fi

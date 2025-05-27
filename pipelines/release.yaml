@@ -41,4 +41,5 @@
   script: |
     echo Hello
     ls scripts/
+    env
     scripts/getSemver.sh
