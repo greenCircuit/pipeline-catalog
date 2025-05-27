@@ -9,7 +9,7 @@ UPDATE_SEMVER="false"
 # get latest semver for default branch
 GIT_TAGS=$(git tag --merged main --list '[0-9]*.[0-9]*.[0-9]*') # use regex to find correct semver tag
 GIT_TAG_LATEST=$(echo "$GIT_TAGS" | tail -n 1)                  
- 
+
 # If no tag found, set to default
 if [ -z "$GIT_TAG_LATEST" ]; then
     echo "Dint find git tag, setting default"
