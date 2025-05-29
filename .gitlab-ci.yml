@@ -36,10 +36,6 @@ check-semver:
 
 create-changelog:
   extends: .changelog
-  variables:
-    version: "${SEMVER}"
 
 tag-repo:
   extends: .create-tag
-  variables:
-    version: "${SEMVER}"

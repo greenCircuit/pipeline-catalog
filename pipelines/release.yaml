@@ -2,8 +2,14 @@
   image: registry.dev.local/homelab/pipeline-catalog:latest
   stage: release
   variables:
-    version: "0.0.1"
+    version: ""
   script: | # shell
+    if [[ $version != "" ]]; then
+      version="${SEMVER}"
+    fi
+    echo "Version set:  $version"
+
+
     git config --global user.email ${GITLAB_USER_EMAIL}
     git config --global user.name  ${CI_COMMIT_AUTHOR}
     git config http.sslVerify false  # using self signed certs 
@@ -11,8 +17,6 @@
     git branch
     git remote add gitlab_pipeline "https://GIT_REPO_TOKEN:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
 
-
-    echo "<br>" >> CHANGELOG.md
     echo "## ${version} - ${CI_COMMIT_MESSAGE}" >> CHANGELOG.md
     echo "$(date '+%Y-%m-%d')" >> CHANGELOG.md
     echo "- Commit URL: http://gitlab.dev.local/${CI_PROJECT_PATH}/-/tree/${CI_COMMIT_SHA}" >> CHANGELOG.md
@@ -33,6 +37,11 @@
   variables:
     GIT_TAG: ""
   script: | # shell
+    if [[ $version != "" ]]; then
+      GIT_TAG="${SEMVER}"
+    fi
+    echo "Tag set:  $version"
+
     if [[ $MAKE_RELEASE == "true" ]]; then
       git config --global user.email ${CI_COMMIT_AUTHOR}
       git config --global user.name  ${GITLAB_USER_NAME}
