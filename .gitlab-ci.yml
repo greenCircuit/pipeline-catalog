@@ -1,6 +1,3 @@
-variables:
-  SEMVER: "0.0.1"   # updated by semver job
-  
 include:
   - pipelines/stages.yaml
   - pipelines/podman.yaml
