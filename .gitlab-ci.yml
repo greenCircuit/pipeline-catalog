@@ -36,5 +36,5 @@ tag-repo:
   extends: .create-tag
   variables:
     version: "${SEMVER}"
-  # rules:
-  # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  rules:
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

@@ -20,8 +20,8 @@ else
     echo "Latest tag found     ${GIT_TAG_LATEST}"
 fi
 
-# not update semver if not default branch
-if [ "$(git rev-parse --abbrev-ref HEAD)" = "${CI_DEFAULT_BRANCH}" ]; then
+# main gating method if want to update semver
+if [ "${CI_COMMIT_BRANCH}" != "${CI_DEFAULT_BRANCH}" ]; then
     echo "Not updating semver,not on default branch"
     echo "SEMVER=${VERSION_NEXT}"
     echo "SEMVER=${GIT_TAG_LATEST}" > semver.env
@@ -45,14 +45,13 @@ elif [[ $latestCommit =~ ${majorRegex} ]]; then
 fi
 
 echo "VERSION_TYPE:        ${VERSION_TYPE}"
-# update semver if forgot to provide string
-if [[ $CI_PIPELINE_SOURCE == 'merge_request_event' && ${VERSION_TYPE} == "" ]]; then
-    VERSION_TYPE="patch"
-else
-    echo version cant be determined, exiting
-    exit 1
+if [[ "${VERSION_TYPE}" == "" ]]; then
+    echo "no semver provided inside commit message"
+    echo "SEMVER=${GIT_TAG_LATEST}" > semver.env
+    exit 0
 fi
-echo "Final Version Type  ${VERSION_TYPE}"
+
+echo "Final Version Type   ${VERSION_TYPE}"
 # update semver when merge or main was provided with semver
 VERSION_NEXT=""
 if [[ $VERSION_TYPE != "" ]]; then
