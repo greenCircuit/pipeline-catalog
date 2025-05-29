@@ -38,13 +38,8 @@ create-changelog:
   extends: .changelog
   variables:
     version: "${SEMVER}"
-  rules:
-  - if: '$MAKE_RELEASE == "true"'
-    when: never
-# tag-repo:
-#   extends: .create-tag
-#   variables:
-#     version: "${SEMVER}"
-#   rules:
-#   - if: '$MAKE_RELEASE == true'
 
+tag-repo:
+  extends: .create-tag
+  variables:
+    version: "${SEMVER}"

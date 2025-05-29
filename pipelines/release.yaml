@@ -19,10 +19,13 @@
     echo "- Pipeline: ${CI_PIPELINE_URL}" >> CHANGELOG.md
     echo "<br>\n" >> CHANGELOG.md
     cat CHANGELOG.md
-    git add CHANGELOG.md
-    git commit -m "automated change log"
-    git push gitlab_pipeline -o ci.skip
-
+    if [[ $MAKE_RELEASE == "true"]]; then
+      git add CHANGELOG.md
+      git commit -m "automated change log"
+      git push gitlab_pipeline -o ci.skip
+    else
+      echo not committing changelog
+    fi
 
 .create-tag:
   image: registry.dev.local/homelab/pipeline-catalog:latest
@@ -30,11 +33,15 @@
   variables:
     GIT_TAG: ""
   script: | # shell
-    git config --global user.email ${CI_COMMIT_AUTHOR}
-    git config --global user.name  ${GITLAB_USER_NAME}
-    git remote add gitlab_ci "http://GIT_REPO_TOKEN:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
-    git tag -a ${GIT_TAG} -m "ci repo tag"
-    git push gitlab_ci --tags -o ci.skip
+    if [[ $MAKE_RELEASE == "true"]]; then
+      git config --global user.email ${CI_COMMIT_AUTHOR}
+      git config --global user.name  ${GITLAB_USER_NAME}
+      git remote add gitlab_ci "http://GIT_REPO_TOKEN:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
+      git tag -a ${GIT_TAG} -m "ci repo tag"
+      git push gitlab_ci --tags -o ci.skip
+    else 
+      echo not making git tag
+    fi
 
 
 .make-semver:
