@@ -4,9 +4,6 @@
   variables:
     version: ""
   script: | # shell
-    if [[ $version != "" ]]; then
-      version="${SEMVER}"
-    fi
     echo "Version set:  $version"
 
 
@@ -37,11 +34,7 @@
   variables:
     GIT_TAG: ""
   script: | # shell
-    if [[ $version != "" ]]; then
-      GIT_TAG="${SEMVER}"
-    fi
     echo "Tag set:  $version"
-
     if [[ $MAKE_RELEASE == "true" ]]; then
       git config --global user.email ${CI_COMMIT_AUTHOR}
       git config --global user.name  ${GITLAB_USER_NAME}

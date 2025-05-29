@@ -33,9 +33,12 @@ check-semver:
     fi
     echo semver creation job was correct
 
-
 create-changelog:
   extends: .changelog
+  variables:
+    version: "${SEMVER}"
 
 tag-repo:
   extends: .create-tag
+  variables:
+    GIT_TAG: "${SEMVER}"
