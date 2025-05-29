@@ -1,5 +1,5 @@
 variables:
-  version: "0.0.1"
+  SEMVER: "0.0.1"   # updated by semver job
   
 include:
   - pipelines/stages.yaml
@@ -10,8 +10,8 @@ include:
 
 # running all pipelines in order to validate them
 
-podman:
-  extends: .create_image
+# podman:
+#   extends: .create_image
 
 git-leaks:
   extends: .secrets_scan
@@ -19,13 +19,22 @@ git-leaks:
 semver:
   extends: .make-semver
 
+check-semver:
+  image: registry.dev.local/homelab/pipeline-catalog:latest
+  stage: release 
+  script: |
+    env | grep SEMVER
+
 create-changelog:
   extends: .changelog
+  variables:
+    version: "${SEMVER}"
   rules:
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 tag-repo:
   extends: .create-tag
+  variables:
+    version: "${SEMVER}"
   rules:
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
-    
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
