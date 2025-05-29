@@ -19,7 +19,7 @@
     echo "- Pipeline: ${CI_PIPELINE_URL}" >> CHANGELOG.md
     echo "<br>\n" >> CHANGELOG.md
     cat CHANGELOG.md
-    if [[ $MAKE_RELEASE == "true"]]; then
+    if [[ $MAKE_RELEASE == "true" ]]; then
       git add CHANGELOG.md
       git commit -m "automated change log"
       git push gitlab_pipeline -o ci.skip
@@ -33,7 +33,7 @@
   variables:
     GIT_TAG: ""
   script: | # shell
-    if [[ $MAKE_RELEASE == "true"]]; then
+    if [[ $MAKE_RELEASE == "true" ]]; then
       git config --global user.email ${CI_COMMIT_AUTHOR}
       git config --global user.name  ${GITLAB_USER_NAME}
       git remote add gitlab_ci "http://GIT_REPO_TOKEN:${GIT_REPO_TOKEN}@gitlab.dev.local//${CI_PROJECT_PATH}.git"
