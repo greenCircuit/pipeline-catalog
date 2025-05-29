@@ -11,47 +11,37 @@ git fetch --all  # get tags from remote
 GIT_TAGS=$(git tag --merged origin/main --list '[0-9]*.[0-9]*.[0-9]*') # use regex to find correct semver tag
 
 GIT_TAG_LATEST=$(echo "$GIT_TAGS" | tail -n 1)                  
-echo "GIT_TAG_LATEST:      ${GIT_TAG_LATEST}"
+echo "GIT_TAG_LATEST:       ${GIT_TAG_LATEST}"
 # If no tag found, set to default
 if [ -z "$GIT_TAG_LATEST" ]; then
     echo "Dint find git tag, setting default"
     GIT_TAG_LATEST="0.0.0"
 else
-    echo "Latest tag found     ${GIT_TAG_LATEST}"
-fi
-
-# main gating method if want to update semver
-if [ "${CI_COMMIT_BRANCH}" != "${CI_DEFAULT_BRANCH}" ]; then
-    echo "Not updating semver,not on default branch"
-    echo "SEMVER=${VERSION_NEXT}"
-    echo "SEMVER=${GIT_TAG_LATEST}" > semver.env
-    exit 0
-else    
-    echo "Found default branch continuing"
+    echo "Latest tag found      ${GIT_TAG_LATEST}"
 fi
 
 
 VERSION_TYPE=""
-latestCommit="$(git log -1 --pretty=%B)" # get commit message
-echo "commit message:      ${latestCommit}"
+echo "commit message:       ${CI_COMMIT_MESSAGE}"
 
 # use regex to determine what changed
-if [[ $latestCommit =~ ${patchRegex} ]]; then
+if [[ $CI_COMMIT_MESSAGE =~ ${patchRegex} ]]; then
     VERSION_TYPE="patch"
-elif [[ $latestCommit =~ ${minorRegex} ]]; then
+elif [[ $CI_COMMIT_MESSAGE =~ ${minorRegex} ]]; then
     VERSION_TYPE="minor"
-elif [[ $latestCommit =~ ${majorRegex} ]]; then
+elif [[ $CI_COMMIT_MESSAGE =~ ${majorRegex} ]]; then
     VERSION_TYPE="major"
 fi
 
-echo "VERSION_TYPE:        ${VERSION_TYPE}"
-if [[ "${VERSION_TYPE}" == "" ]]; then
-    echo "no semver provided inside commit message"
+# main gating method if want to update semver
+echo "VERSION_TYPE found:   ${VERSION_TYPE}"
+if [[ "${VERSION_TYPE}" == "" || "${CI_COMMIT_BRANCH}" != "${CI_DEFAULT_BRANCH}"  ]]; then
+    echo "no semver provided inside commit message or not default branch"
     echo "SEMVER=${GIT_TAG_LATEST}" > semver.env
+    echo "MAKE_RELEASE=false" > semver.env
     exit 0
 fi
 
-echo "Final Version Type   ${VERSION_TYPE}"
 # update semver when merge or main was provided with semver
 VERSION_NEXT=""
 if [[ $VERSION_TYPE != "" ]]; then
@@ -70,3 +60,4 @@ fi
 
 echo "Next Version: ${VERSION_NEXT}"
 echo "SEMVER=${VERSION_NEXT}" > semver.env
+echo "MAKE_RELEASE=true" > semver.env
