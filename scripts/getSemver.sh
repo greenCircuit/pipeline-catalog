@@ -21,7 +21,7 @@ else
 fi
 
 # not update semver if not default branch
-if [[ "$(git rev-parse --abbrev-ref HEAD)" != "${CI_DEFAULT_BRANCH}" ]]; then
+if [ "$(git rev-parse --abbrev-ref HEAD)" = "${CI_DEFAULT_BRANCH}" ]; then
     echo "Not updating semver,not on default branch"
     echo "SEMVER=${VERSION_NEXT}"
     echo "SEMVER=${GIT_TAG_LATEST}" > semver.env
