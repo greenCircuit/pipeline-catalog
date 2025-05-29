@@ -26,6 +26,8 @@ if [ "$(git rev-parse --abbrev-ref HEAD)" = "${CI_DEFAULT_BRANCH}" ]; then
     echo "SEMVER=${VERSION_NEXT}"
     echo "SEMVER=${GIT_TAG_LATEST}" > semver.env
     exit 0
+else    
+    echo "Found default branch continuing"
 fi
 
 
@@ -55,14 +57,15 @@ echo "Final Version Type  ${VERSION_TYPE}"
 VERSION_NEXT=""
 if [[ $VERSION_TYPE != "" ]]; then
     echo "updating semver"
-    if [ "$VERSION_TYPE" = "patch" ]; then
+    if [ "${VERSION_TYPE}" = "patch" ]; then
         VERSION_NEXT=$(echo "$GIT_TAG_LATEST" | awk -F. '{ $NF++; print $1 "." $2 "." $NF }')
-    elif [ "$VERSION_TYPE" = "minor" ]; then
+    elif [ "${VERSION_TYPE}" = "minor" ]; then
         VERSION_NEXT=$(echo "$GIT_TAG_LATEST" | awk -F. '{ $2++; $3=0; print $1 "." $2 "." $3 }')
-    elif [ "$VERSION_TYPE" = "major" ]; then
+    elif [ "${VERSION_TYPE}" = "major" ]; then
         VERSION_NEXT=$(echo "$GIT_TAG_LATEST" | awk -F. '{ $1++; $2=0; $3=0; print $1 "." $2 "." $3 }')
     else
         echo "Not updating version, VERSION_TYPE can only be patch, minor, major"
+        exit 1
     fi
 fi
 
