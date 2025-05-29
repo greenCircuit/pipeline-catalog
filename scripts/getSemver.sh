@@ -9,7 +9,7 @@ majorRegex="^(major):"
 # get latest semver for default branch
 git fetch --all  # get tags from remote 
 GIT_TAGS=$(git tag --merged origin/main --list '[0-9]*.[0-9]*.[0-9]*') # use regex to find correct semver tag
-
+echo "All tags: $GIT_TAGS"
 GIT_TAG_LATEST=$(echo "$GIT_TAGS" | tail -n 1)                  
 echo "GIT_TAG_LATEST:       ${GIT_TAG_LATEST}"
 # If no tag found, set to default
