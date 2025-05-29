@@ -38,7 +38,6 @@ echo "VERSION_TYPE found:   ${VERSION_TYPE}"
 if [[ "${VERSION_TYPE}" == "" || "${CI_COMMIT_BRANCH}" != "${CI_DEFAULT_BRANCH}"  ]]; then
     echo "no semver provided inside commit message or not default branch"
     echo "SEMVER=${GIT_TAG_LATEST}" > semver.env
-    echo "MAKE_RELEASE=false" > semver.env
     exit 0
 fi
 
@@ -59,5 +58,5 @@ if [[ $VERSION_TYPE != "" ]]; then
 fi
 
 echo "Next Version: ${VERSION_NEXT}"
-echo "SEMVER=${VERSION_NEXT}" > semver.env
-echo "MAKE_RELEASE=true" > semver.env
+echo "SEMVER=${VERSION_NEXT}" >> semver.env
+echo "MAKE_RELEASE=true" >> semver.env

@@ -1,5 +1,5 @@
 variables:
-  MAKE_RELEASE: "false"  # will be overwritten by semver job
+  # MAKE_RELEASE: "false"  # will be overwritten by semver job
   SEMVER: "0.0.1"
 
 
@@ -40,7 +40,6 @@ create-changelog:
     version: "${SEMVER}"
   rules:
   - if: '$MAKE_RELEASE == "true"'
-
 # tag-repo:
 #   extends: .create-tag
 #   variables:
