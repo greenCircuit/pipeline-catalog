@@ -20,10 +20,17 @@ semver:
   extends: .make-semver
 
 check-semver:
+  needs: [semver]
   image: registry.dev.local/homelab/pipeline-catalog:latest
-  stage: release 
-  script: |
+  stage: semver 
+  script: | # shell
     env | grep SEMVER
+    env | grep MAKE_RELEASE
+    if [[ $SEMVER == "" || $MAKE_RELEASE == "" ]]; then
+      echo semver job didnt provide env variables
+    fi
+    echo semver creation job was correct
+
 
 create-changelog:
   extends: .changelog
