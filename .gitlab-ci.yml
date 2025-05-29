@@ -1,3 +1,8 @@
+variables:
+  MAKE_RELEASE: "false"  # will be overwritten by semver job
+  SEMVER: "0.0.1"
+
+
 include:
   - pipelines/stages.yaml
   - pipelines/podman.yaml
@@ -34,11 +39,12 @@ create-changelog:
   variables:
     version: "${SEMVER}"
   rules:
-  - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  - if: '$MAKE_RELEASE == true'
 
-tag-repo:
-  extends: .create-tag
-  variables:
-    version: "${SEMVER}"
-  rules:
-  - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+# tag-repo:
+#   extends: .create-tag
+#   variables:
+#     version: "${SEMVER}"
+#   rules:
+#   - if: '$MAKE_RELEASE == true'
+
