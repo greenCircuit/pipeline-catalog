@@ -54,7 +54,7 @@
     minorRegex="^(feat|feature):"
     majorRegex="^(major):"
 
-    get tags from remote 
+    # get tags from remote 
     git checkout "${CI_DEFAULT_BRANCH}"; git pull     # go to main branch to get all tags
     GIT_TAGS=$(git tag --list '[0-9]*.[0-9]*.[0-9]*') # use regex to find correct semver tag
     echo "All tags: $GIT_TAGS"
