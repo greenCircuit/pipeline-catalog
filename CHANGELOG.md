@@ -10,3 +10,9 @@ Changelog pipeline is working
 - Commit URL: http://gitlab.dev.local/homelab/pipeline-catalog/-/tree/cc6b3669d9461d0482731e4f954c55ae7b74d1d8
 - Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/202
 <br>
+## 1.0.1 - fix: moving semver logic to pipeline so other projects can import it
+
+2025-05-30
+- Commit URL: http://gitlab.dev.local/homelab/pipeline-catalog/-/tree/04821521c2ab1bfc6cd024a08569ab95bbba22cd
+- Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/208
+<br>\n
