@@ -21,7 +21,6 @@ else
     echo "Latest tag found      ${GIT_TAG_LATEST}"
 fi
 
-
 VERSION_TYPE=""
 echo "commit message:       ${CI_COMMIT_MESSAGE}"
 
