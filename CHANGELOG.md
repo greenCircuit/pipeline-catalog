@@ -16,3 +16,9 @@ Changelog pipeline is working
 - Commit URL: http://gitlab.dev.local/homelab/pipeline-catalog/-/tree/04821521c2ab1bfc6cd024a08569ab95bbba22cd
 - Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/208
 <br>\n
+## 1.0.2 - fix: changelog format so gitlab can display it properly
+2025-06-07
+- Commit URL: http://gitlab.dev.local/homelab/pipeline-catalog/-/tree/3ad8e40096f26ca7cac018cab88bf70e3ba6a949
+- Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/271
+<br>
+
