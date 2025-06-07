@@ -15,7 +15,7 @@
     echo "$(date '+%Y-%m-%d')" >> CHANGELOG.md
     echo "- Commit URL: http://gitlab.dev.local/${CI_PROJECT_PATH}/-/tree/${CI_COMMIT_SHA}" >> CHANGELOG.md
     echo "- Pipeline: ${CI_PIPELINE_URL}" >> CHANGELOG.md
-    echo "<br>\n" >> CHANGELOG.md
+    echo "<br>" >> CHANGELOG.md
     cat CHANGELOG.md
     if [[ $MAKE_RELEASE == "true" ]]; then
       git add CHANGELOG.md
