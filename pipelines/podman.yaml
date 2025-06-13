@@ -8,7 +8,7 @@
       TAG=${CI_COMMIT_BRANCH}
     fi
     echo "IMG tag:  ${TAG}"
-    buildah login $CI_REGISTRY_IMAGE -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    buildah login --tls-verify=false $CI_REGISTRY_IMAGE -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     echo "Building the image..."
     buildah bud -t "${CI_REGISTRY_IMAGE}:${TAG}" .
 
