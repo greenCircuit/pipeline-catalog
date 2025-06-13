@@ -13,4 +13,4 @@
     buildah bud -t "${CI_REGISTRY_IMAGE}:${TAG}" .
 
     echo "Pushing the image..."
-    buildah push "${CI_REGISTRY_IMAGE}:${TAG}"
+    buildah push --tls-verify=false  "${CI_REGISTRY_IMAGE}:${TAG}"
