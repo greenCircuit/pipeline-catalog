@@ -1,5 +1,6 @@
 .create_image:
-  image: registry.dev.local/homelab/pipeline-catalog:latest
+  # image: registry.dev.local/homelab/pipeline-catalog:latest
+  image: quay.io/podman/stable:latest
   script: | # shell
     if [ "$CI_COMMIT_REF_NAME" = "$CI_DEFAULT_BRANCH" ]; then
       TAG="latest"
