@@ -13,6 +13,6 @@
     cat report.json
   artifacts:
     paths:
-      - report.json
-      - generated.yam
-
+      - ${CHECK_PATH}/report.json
+      - ${CHECK_PATH}/generated.yam
+    expire_in: 1 week

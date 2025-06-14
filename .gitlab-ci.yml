@@ -25,7 +25,7 @@ helm:
   extends: .check-helm
   parallel:
     matrix: 
-    - CHECK_PATH: ["test-data/helm/correct-hc"]
+    - CHECK_PATH: ["test-data/helm/correct-hc", "test-data/helm/wrong-spec", "test-data/helm/wrong-template"]
     
 
 
