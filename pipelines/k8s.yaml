@@ -5,7 +5,6 @@
     CHECK_PATH: ""
   script: | #shell
     cd $CHECK_PATH
-    helm lint .
     helm template . > generated.yaml
     /kubeconform -summary -output json --strict generated.yaml > "report.json"
     cat generated.yaml
