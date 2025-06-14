@@ -8,7 +8,7 @@ RUN apk add podman \
             git \
             gawk \
             curl \
-            openssl \
+            openssl 
 
 RUN alias awk=gawk
 CMD ["bash"]
