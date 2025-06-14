@@ -1,7 +1,6 @@
 .check-helm:
   stage: unit-test
   image: registry.dev.local/homelab/pipeline-catalog/k8s:latest
-  entrypoint: [""]
   variables:
     CHECK_PATH: ""
   script: | #shell
