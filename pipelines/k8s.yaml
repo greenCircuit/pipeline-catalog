@@ -8,9 +8,9 @@
     helm lint .
     helm template . > generated.yaml
     cat test.yaml
-    kubeconform -summary -output json --strict generated.yaml > "${CHECK_PATH}.json"
+    kubeconform -summary -output json --strict generated.yaml > "report.json"
   artifacts:
     paths:
-      - "${CHECK_PATH}.json"
+      - report.json
       - generated.yam
 
