@@ -1,6 +1,7 @@
 .create_image:
   # image: registry.dev.local/homelab/pipeline-catalog:latest
   image: quay.io/buildah/stable:latest
+  stage: build
   variables:
     PATH: "Dockerfile"    # path for dockerfile
   script: | # shell
