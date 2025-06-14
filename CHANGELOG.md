@@ -22,3 +22,10 @@ Changelog pipeline is working
 - Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/271
 <br>
 
+## 0.1.0 - feat: adding job for building images, adding stages to validate helm charts
+
+2025-06-14
+- Commit URL: http://gitlab.dev.local/homelab/pipeline-catalog/-/tree/5afc4dd4ce8c209df2253e3b217a70cced69a551
+- Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/346
+<br>
+
