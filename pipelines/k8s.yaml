@@ -1,10 +1,16 @@
 .check-helm:
   stage: unit-test
+  image: registry.dev.local/homelab/pipeline-catalog/k8s:latest
   variables:
     CHECK_PATH: ""
   script: | #shell
     cd $CHECK_PATH
     helm lint .
-    helm template . > test.yaml
+    helm template . > generated.yaml
     cat test.yaml
-    kubeconform -summary -output json --strict test.yaml > "${CHECK_PATH}.json"
+    kubeconform -summary -output json --strict generated.yaml > "${CHECK_PATH}.json"
+  artifacts:
+    paths:
+      - "${CHECK_PATH}.json"
+      - generated.yam
+
