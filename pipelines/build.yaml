@@ -2,6 +2,8 @@
   # image: registry.dev.local/homelab/pipeline-catalog:latest
   image: quay.io/buildah/stable:latest
   stage: build
+  variables:
+    FILE_PATH: "Dockerfile"
   script: | # shell
     if [ "$CI_COMMIT_REF_NAME" = "$CI_DEFAULT_BRANCH" ]; then
       TAG="latest"
@@ -11,7 +13,7 @@
     echo "IMG tag:  ${TAG}"
     buildah login --tls-verify=false $CI_REGISTRY_IMAGE -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     echo "Building the image..."
-    buildah bud -t "${CI_REGISTRY_IMAGE}:${TAG}" .
+    buildah bud -t "${CI_REGISTRY_IMAGE}:${TAG}" -f "${FILE_PATH}"
 
     echo "Pushing the image..."
     buildah push --tls-verify=false  "${CI_REGISTRY_IMAGE}:${TAG}"

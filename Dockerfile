@@ -8,15 +8,7 @@ RUN apk add podman \
             git \
             gawk \
             curl \
-            openssl
-RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-RUN chmod 700 get_helm.sh
-RUN ./get_helm.sh
-RUN brew install kubeconform
-
-
-# Create the insecure registry config
-
+            openssl \
 
 RUN alias awk=gawk
 CMD ["bash"]
