@@ -14,6 +14,10 @@ include:
 # running all pipelines in order to validate them
 img:
   extends: .create_image
+  parallel:
+    matrix:
+      - FILE_PATH: ["Dockerfile", "Dockerfile.k8s"]
+        REGISTRY_PATH: ["base", "k8s"]
 
 git-leaks:
   extends: .secrets_scan
