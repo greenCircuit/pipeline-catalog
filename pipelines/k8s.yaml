@@ -4,6 +4,9 @@
   variables:
     CHECK_PATH: ""
   script: | #shell
+    echo "CHECK_PATH:        ${CHECK_PATH}"
+    echo "inside chart dir"
+    ls ${CHECK_PATH}
     cd $CHECK_PATH
     helm template . > generated.yaml
     /kubeconform -summary -output json --strict generated.yaml > "report.json"

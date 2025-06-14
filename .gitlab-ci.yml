@@ -28,6 +28,13 @@ helm:
     # - CHECK_PATH: ["test-data/helm/correct-hc", "test-data/helm/wrong-spec", "test-data/helm/wrong-template"]
     - CHECK_PATH: ["test-data/helm/correct-hc"]
 
+failing-helm:
+  extends: .check-helm
+  parallel:
+    matrix: 
+    - CHECK_PATH: ["test-data/helm/wrong-spec", "test-data/helm/wrong-template"]
+  allow_failure: true
+
 git-leaks:
   extends: .secrets_scan
 
