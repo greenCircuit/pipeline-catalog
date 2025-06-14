@@ -9,7 +9,8 @@
     helm template . > generated.yaml
     /kubeconform -summary -output json --strict generated.yaml > "report.json"
     cat generated.yaml
-    capt report.json
+    echo "=============="
+    cat report.json
   artifacts:
     paths:
       - report.json
