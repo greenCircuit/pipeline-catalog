@@ -1,6 +1,6 @@
 stages:
 - semver
 - build
-- test
+- unit-test
 - security
 - release

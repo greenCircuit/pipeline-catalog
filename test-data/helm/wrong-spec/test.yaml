@@ -1,0 +1,104 @@
+---
+# Source: working/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: release-name-working
+  labels:
+    helm.sh/chart: working-0.1.0
+    app.kubernetes.io/name: working
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+automountServiceAccountToken: true
+---
+# Source: working/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-working
+  labels:
+    helm.sh/chart: working-0.1.0
+    app.kubernetes.io/name: working
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: working
+    app.kubernetes.io/instance: release-name
+---
+# Source: working/templates/deployment.yaml
+metadata:
+  name: release-name-working
+  labels:
+    helm.sh/chart: working-0.1.0
+    app.kubernetes.io/name: working
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: working
+      app.kubernetes.io/instance: release-name
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: working-0.1.0
+        app.kubernetes.io/name: working
+        app.kubernetes.io/instance: release-name
+        app.kubernetes.io/version: "1.16.0"
+        app.kubernetes.io/managed-by: Helm
+    spec:
+      serviceAccountName: release-name-working
+      securityContext:
+        {}
+      containers:
+        - name: working
+          securityContext:
+            {}
+          image: "nginx:1.16.0"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+---
+# Source: working/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "release-name-working-test-connection"
+  labels:
+    helm.sh/chart: working-0.1.0
+    app.kubernetes.io/name: working
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['release-name-working:80']
+  restartPolicy: Never

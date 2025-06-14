@@ -7,15 +7,14 @@ RUN apk add podman \
             wget \
             git \
             gawk
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+RUN chmod 700 get_helm.sh
+RUN ./get_helm.sh
+RUN brew install kubeconform
 
 
 # Create the insecure registry config
-RUN mkdir -p /etc/containers && \
-    echo 'unqualified-search-registries = ["docker.io"]' > /etc/containers/registries.conf && \
-    echo '' >> /etc/containers/registries.conf && \
-    echo '[[registry]]' >> /etc/containers/registries.conf && \
-    echo 'location = "registry.dev.local"' >> /etc/containers/registries.conf && \
-    echo 'insecure = true' >> /etc/containers/registries.conf
+
 
 RUN alias awk=gawk
 CMD ["bash"]

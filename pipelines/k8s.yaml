@@ -1,0 +1,10 @@
+.check-helm:
+  stage: unit-test
+  variables:
+    CHECK_PATH: ""
+  script: | #shell
+    cd $CHECK_PATH
+    helm lint .
+    helm template . > test.yaml
+    cat test.yaml
+    kubeconform -summary -output json --strict test.yaml > "${CHECK_PATH}.json"

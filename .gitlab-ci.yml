@@ -6,6 +6,7 @@ variables:
 include:
   - pipelines/stages.yaml
   - pipelines/build.yaml
+  - pipelines/k8s.yaml
   - pipelines/security.yaml
   - pipelines/template.yml
   - pipelines/release.yaml
@@ -41,4 +42,3 @@ tag-repo:
   extends: .create-tag
   variables:
     GIT_TAG: "${SEMVER}"
-    
