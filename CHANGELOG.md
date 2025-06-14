@@ -16,4 +16,10 @@ Changelog pipeline is working
 ## 1.0.2 - fix: changelog format so gitlab can display it properly
 2025-06-07
 - Commit URL: http://gitlab.dev.local/homelab/pipeline-catalog/-/tree/3ad8e40096f26ca7cac018cab88bf70e3ba6a949
-- Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/271
+- Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/271## 1.1.0 - feat: imgs are buildig now
+
+2025-06-14
+- Commit URL: http://gitlab.dev.local/homelab/pipeline-catalog/-/tree/ec896dbaa644d3084fe4727aba1a3396ba9fb24d
+- Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/323
+<br>
+
