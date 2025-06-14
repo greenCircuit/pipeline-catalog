@@ -5,13 +5,13 @@ variables:
 
 include:
   - pipelines/stages.yaml
-  - pipelines/podman.yaml
+  - pipelines/build.yaml
   - pipelines/security.yaml
   - pipelines/template.yml
   - pipelines/release.yaml
 
 # running all pipelines in order to validate them
-podman:
+img:
   extends: .create_image
 
 git-leaks:
