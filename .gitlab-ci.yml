@@ -21,18 +21,23 @@ img-k8s:
 img-base:
   extends: .create_image
 
-helm:
+# these helm charts should pass
+passing-helm:
   extends: .check-helm
   parallel:
     matrix: 
-    # - CHECK_PATH: ["test-data/helm/correct-hc", "test-data/helm/wrong-spec", "test-data/helm/wrong-template"]
-    - CHECK_PATH: ["test-data/helm/correct-hc"]
+    - CHECK_PATH: 
+      - "test-data/helm/correct-hc"
+      - "test-data/helm/correct-hc"
 
+# these helm chart should fail
 failing-helm:
   extends: .check-helm
   parallel:
     matrix: 
-    - CHECK_PATH: ["test-data/helm/wrong-spec", "test-data/helm/wrong-template"]
+    - CHECK_PATH: 
+      - "test-data/helm/wrong-spec"
+      - "test-data/helm/wrong-template"
   allow_failure: true
 
 git-leaks:

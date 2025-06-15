@@ -8,7 +8,7 @@
     echo "inside chart dir"
     ls ${CHECK_PATH}
     cd $CHECK_PATH
-    helm template . > generated.yaml
+    helm template --debug . > generated.yaml
     echo helm been generated correctly
     cat generated.yaml
     /kubeconform -summary -output json --skip CustomResourceDefinition generated.yaml > "report.json"
