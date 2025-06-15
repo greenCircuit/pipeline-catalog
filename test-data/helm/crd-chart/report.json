@@ -1,0 +1,18 @@
+{
+  "resources": [
+    {
+      "filename": "generated.yaml",
+      "kind": "GitRepository",
+      "name": "podinfo",
+      "version": "source.toolkit.fluxcd.io/v1",
+      "status": "statusSkipped",
+      "msg": ""
+    }
+  ],
+  "summary": {
+    "valid": 0,
+    "invalid": 0,
+    "errors": 0,
+    "skipped": 1
+  }
+}

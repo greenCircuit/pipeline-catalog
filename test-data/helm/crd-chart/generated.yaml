@@ -1,0 +1,12 @@
+---
+# Source: working/templates/fluxGitrepo.yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: podinfo
+  namespace: default
+spec:
+  interval: 5m0s
+  url: https://github.com/stefanprodan/podinfo
+  ref:
+    branch: master

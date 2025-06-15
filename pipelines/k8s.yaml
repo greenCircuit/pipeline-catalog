@@ -9,13 +9,15 @@
     ls ${CHECK_PATH}
     cd $CHECK_PATH
     helm template --debug . > generated.yaml
-    helm plugin list
-    helm plugin install https://github.com/jtyr/kubeconform-helm
-    helm kubeconform --verbose --summary .
-
-    # /kubeconform -summary -output json --skip CustomResourceDefinition generated.yaml > "report.json" || true
+    /kubeconform --verbose --summary --output json --ignore-missing-schemas -- generated.yaml > "report.json" || true
     echo "=============="
     cat report.json
+    if [[ "$(jq '.summary.errors' report.json)" != "0" ]]; then
+      echo "🚨 Validation failed"
+      exit 1
+    else 
+      echo "✅ Validation passed"
+    fi
   artifacts:
     paths:
       - ${CHECK_PATH}/report.json

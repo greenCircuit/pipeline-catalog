@@ -1,0 +1,18 @@
+{
+  "resources": [
+    {
+      "filename": "generated.yaml",
+      "kind": "",
+      "name": "",
+      "version": "",
+      "status": "statusError",
+      "msg": "lstat generated.yaml: no such file or directory"
+    }
+  ],
+  "summary": {
+    "valid": 0,
+    "invalid": 0,
+    "errors": 1,
+    "skipped": 0
+  }
+}
