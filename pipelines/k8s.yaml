@@ -10,17 +10,11 @@
     cd $CHECK_PATH
     helm template --debug . > generated.yaml
     helm kubeconform --verbose --summary .
-
+    helm plugin list
 
     # /kubeconform -summary -output json --skip CustomResourceDefinition generated.yaml > "report.json" || true
     echo "=============="
     cat report.json
-    if [[ jq -e '.summary.invalid > 0 or .summary.errors > 0' ]] report.json; then
-      echo "🚨 kubeconform reported invalid resources"
-      exit 1
-    else
-      echo "✅ kubeconform success"
-    fi
   artifacts:
     paths:
       - ${CHECK_PATH}/report.json

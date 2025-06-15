@@ -7,3 +7,4 @@ RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/s
 RUN chmod 700 get_helm.sh
 RUN ./get_helm.sh
 RUN helm plugin install https://github.com/melmorabity/helm-kubeconform --version 0.6.7.1
+RUN helm plugin list
