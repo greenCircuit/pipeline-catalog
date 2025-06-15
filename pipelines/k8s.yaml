@@ -9,8 +9,9 @@
     ls ${CHECK_PATH}
     cd $CHECK_PATH
     helm template --debug . > generated.yaml
-    helm kubeconform --verbose --summary .
     helm plugin list
+    helm plugin install https://github.com/jtyr/kubeconform-helm
+    helm kubeconform --verbose --summary .
 
     # /kubeconform -summary -output json --skip CustomResourceDefinition generated.yaml > "report.json" || true
     echo "=============="
