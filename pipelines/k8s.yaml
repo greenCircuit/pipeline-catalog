@@ -9,6 +9,7 @@
     ls ${CHECK_PATH}
     cd $CHECK_PATH
     helm template --debug . > generated.yaml
+    cat generated.yaml
     /kubeconform --verbose --summary --output json --ignore-missing-schemas -- generated.yaml > "report.json" || true
     echo "=============="
     cat report.json
@@ -21,5 +22,5 @@
   artifacts:
     paths:
       - ${CHECK_PATH}/report.json
-      - ${CHECK_PATH}/generated.yam
+      - ${CHECK_PATH}/generated.yaml
     expire_in: 1 week
