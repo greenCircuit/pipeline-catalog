@@ -28,7 +28,7 @@ passing-helm:
     matrix: 
     - CHECK_PATH: 
       - "test-data/helm/correct-hc"
-      - "test-data/helm/correct-hc"
+      - "test-data/helm/crd-chart"
 
 # these helm chart should fail
 failing-helm:
