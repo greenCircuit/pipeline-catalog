@@ -29,3 +29,10 @@ Changelog pipeline is working
 - Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/346
 <br>
 
+## 0.1.1 - fix: dont fail if checking crds can see report when fail
+
+2025-06-15
+- Commit URL: http://gitlab.dev.local/homelab/pipeline-catalog/-/tree/41f6178e4a2e046d692d833bbfd7e1ccbb7f50cc
+- Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/368
+<br>
+
