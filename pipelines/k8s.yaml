@@ -13,7 +13,7 @@
     /kubeconform --verbose --summary --output json --ignore-missing-schemas -- generated.yaml > "report.json" || true
     echo "=============="
     cat report.json
-    if [[ "$(jq '.summary.errors' report.json)" != "0" ]]; then
+    if [[ "$(jq '.summary.errors' report.json)" != "0" || "$(jq '.summary.invalid' report.json)" != "0" ]]; then
       echo "🚨 Validation failed"
       exit 1
     else 
