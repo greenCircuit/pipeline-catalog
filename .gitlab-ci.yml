@@ -12,14 +12,22 @@ include:
   - pipelines/release.yaml
 
 # running all pipelines in order to validate them
+# Creating pipeline images
 img-k8s:
   extends: .create_image
   variables:
-    FILE_PATH: "Dockerfile.k8s"
+    FILE_PATH: "containerfiles/Dockerfile.k8s"
     REGISTRY_PATH: "k8s"
+  rules:
+    - changes: ["containerfiles/Dockerfile.k8s"]
 
 img-base:
   extends: .create_image
+  variables:
+    FILE_PATH: "containerfiles/Dockerfile"
+    REGISTRY_PATH: ""
+  rules:
+    - changes: ["containerfiles/Dockerfile"]
 
 # these helm charts should pass
 passing-helm:

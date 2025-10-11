@@ -64,8 +64,9 @@
     echo "GIT_TAG_LATEST:       ${GIT_TAG_LATEST}"
     # If no tag found, set to default
     if [ -z "$GIT_TAG_LATEST" ]; then
-        echo "Dint find git tag, setting default"
-        GIT_TAG_LATEST="0.0.0"
+        echo "Dint find git tag, setting default, exiting"
+        exit 1
+        # GIT_TAG_LATEST="0.0.0"
     else
         echo "Latest tag found      ${GIT_TAG_LATEST}"
     fi
