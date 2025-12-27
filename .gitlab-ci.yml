@@ -60,10 +60,14 @@ git-leaks:
   extends: .secrets_scan
 
 semver-dry-run:
+  variables:
+    GIT_DEPTH: "0" 
+    GL_TOKEN: $CI_JOB_TOKEN
   image: registry.dev.local/home-lab/pipeline-catalog/semver:latest
   stage: semver
   script: |
-    npx semantic-release --dry-run --branches main --no-ci
+    npx semantic-release --dry-run --branches $CI_COMMIT_REF_NAME
+    env
 
 
 # semver:
