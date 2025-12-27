@@ -18,24 +18,24 @@ img-k8s:
   variables:
     FILE_PATH: "containerfiles/Dockerfile.k8s"
     REGISTRY_PATH: "k8s"
-  # rules:
-  #   - changes: ["containerfiles/Dockerfile.k8s"]
+  rules:
+    - changes: ["containerfiles/Dockerfile.k8s"]
 
 img-base:
   extends: .create_image
   variables:
     FILE_PATH: "containerfiles/Dockerfile"
     REGISTRY_PATH: ""
-  # rules:
-  #   - changes: ["containerfiles/Dockerfile"]
+  rules:
+    - changes: ["containerfiles/Dockerfile"]
     
 semver-img:
   extends: .create_image
   variables:
     FILE_PATH: "containerfiles/Dockerfile.semver"
     REGISTRY_PATH: "semver"
-  # rules:
-  #   - changes: ["containerfiles/Dockerfile.semver"]
+  rules:
+    - changes: ["containerfiles/Dockerfile.semver"]
 
 # these helm charts should pass
 passing-helm:
@@ -58,6 +58,12 @@ failing-helm:
 
 git-leaks:
   extends: .secrets_scan
+
+semver-dry-run:
+  image: registry.dev.local/home-lab/pipeline-catalog/semver:latest
+  script: |
+    npx semantic-release --dry-run --branches main --no-ci
+
 
 # semver:
 #   extends: .make-semver

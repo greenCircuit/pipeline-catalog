@@ -26,9 +26,12 @@
 
     echo "IMG tag:         ${TAG}"
     echo "Registry:        ${CI_REGISTRY_IMAGE}"
-    buildah login --tls-verify=false $CI_REGISTRY_IMAGE -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    echo ====================================
+    cat ${FILE_PATH}
+    echo ====================================
+    build login --tls-verify=false $CI_REGISTRY_IMAGE -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     echo "Building the image..."
-    buildah bud -t "${CI_REGISTRY_IMAGE}:${TAG}" -f "${FILE_PATH}"
+    buildah build -t "${CI_REGISTRY_IMAGE}:${TAG}" -f "${FILE_PATH}"
 
     echo "Pushing the image..."
     buildah push --tls-verify=false  "${CI_REGISTRY_IMAGE}:${TAG}"

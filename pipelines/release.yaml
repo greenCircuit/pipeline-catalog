@@ -44,7 +44,6 @@
       echo not making git tag
     fi
 
-
 .make-semver:
   image: registry.dev.local/home-lab/pipeline-catalog:latest
   stage: semver 
@@ -113,3 +112,4 @@
   artifacts:
     reports:
       dotenv: semver.env
+
