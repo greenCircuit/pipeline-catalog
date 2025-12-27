@@ -28,6 +28,14 @@ img-base:
     REGISTRY_PATH: ""
   rules:
     - changes: ["containerfiles/Dockerfile"]
+    
+semver-img:
+  extends: .create_image
+  variables:
+    FILE_PATH: "containerfiles/Dockerfile.semver"
+    REGISTRY_PATH: "semver"
+  rules:
+    - changes: ["containerfiles/Dockerfile.semver"]
 
 # these helm charts should pass
 passing-helm:
@@ -51,27 +59,27 @@ failing-helm:
 git-leaks:
   extends: .secrets_scan
 
-semver:
-  extends: .make-semver
+# semver:
+#   extends: .make-semver
 
-check-semver:
-  needs: [semver]
-  image: registry.dev.local/homelab/pipeline-catalog:latest
-  stage: semver 
-  script: | # shell
-    env | grep SEMVER
-    env | grep MAKE_RELEASE
-    if [[ $SEMVER == "" || $MAKE_RELEASE == "" ]]; then
-      echo semver job didnt provide env variables
-    fi
-    echo semver creation job was correct
+# check-semver:
+#   needs: [semver]
+#   image: registry.dev.local/home-lab/pipeline-catalog:latest
+#   stage: semver 
+#   script: | # shell
+#     env | grep SEMVER
+#     env | grep MAKE_RELEASE
+#     if [[ $SEMVER == "" || $MAKE_RELEASE == "" ]]; then
+#       echo semver job didnt provide env variables
+#     fi
+#     echo semver creation job was correct
 
-create-changelog:
-  extends: .changelog
-  variables:
-    version: "${SEMVER}"
+# create-changelog:
+#   extends: .changelog
+#   variables:
+#     version: "${SEMVER}"
 
-tag-repo:
-  extends: .create-tag
-  variables:
-    GIT_TAG: "${SEMVER}"
+# tag-repo:
+#   extends: .create-tag
+#   variables:
+#     GIT_TAG: "${SEMVER}"

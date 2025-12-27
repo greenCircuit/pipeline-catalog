@@ -8,7 +8,7 @@ fi
 git remote add  gitlab  "http://gitlab.dev.io/home-lab/${projectName}"
 git remote add  origin  "https://github.com/greenCircuit/${projectName}"
 
-git remote set-url --add --push origin http://gitlab.dev.local/${projectName}
+git remote set-url --add --push origin http://gitlab.dev.local/home-lab/${projectName}
 git remote set-url --add --push origin https://github.com/greenCircuit/${projectName}
 git push --set-upstream origin main
 # git remote -v
