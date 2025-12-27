@@ -61,6 +61,7 @@ git-leaks:
 
 semver-dry-run:
   image: registry.dev.local/home-lab/pipeline-catalog/semver:latest
+  stage: semver
   script: |
     npx semantic-release --dry-run --branches main --no-ci
 
