@@ -4,3 +4,13 @@ RUN apk add --no-cache git
 RUN npx --package semantic-release \
     --package @semantic-release/exec \
     --package conventional-changelog-conventionalcommits
+
+# default release rules
+RUN echo "module.exports = { \
+    branches: ['main'], \
+    plugins: [ \
+        '@semantic-release/commit-analyzer', \
+        '@semantic-release/release-notes-generator', \
+        '@semantic-release/gitlab' \
+    ] \
+};" > /releaserc.js

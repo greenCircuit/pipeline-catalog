@@ -66,7 +66,8 @@ semver-dry-run:
   image: registry.dev.local/home-lab/pipeline-catalog/semver:latest
   stage: semver
   script: |
-    npx semantic-release --dry-run --branches $CI_COMMIT_REF_NAME
+    ls -la /
+    npx semantic-release --extends /releaserc.js --dry-run --branches $CI_COMMIT_REF_NAME
     env
 
 
