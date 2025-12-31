@@ -1,5 +1,5 @@
 .changelog:
-  image: registry.dev.local/homelab/pipeline-catalog:latest
+  image: registry.dev.local/home-lab/pipeline-catalog:latest
   stage: release
   variables:
     version: ""
@@ -28,7 +28,7 @@
     fi
 
 .create-tag:
-  image: registry.dev.local/homelab/pipeline-catalog:latest
+  image: registry.dev.local/home-lab/pipeline-catalog:latest
   stage: release
   variables:
     GIT_TAG: ""
@@ -44,9 +44,8 @@
       echo not making git tag
     fi
 
-
 .make-semver:
-  image: registry.dev.local/homelab/pipeline-catalog:latest
+  image: registry.dev.local/home-lab/pipeline-catalog:latest
   stage: semver 
   script: | # shell
     # Exit script if command fails or uninitialized variables used
@@ -113,3 +112,4 @@
   artifacts:
     reports:
       dotenv: semver.env
+
