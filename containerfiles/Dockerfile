@@ -1,6 +1,5 @@
 FROM docker.io/alpine:latest 
-RUN apk add podman \
-            fuse-overlayfs \
+RUN apk add buildah \
             yq \
             jq \
             bash \ 
