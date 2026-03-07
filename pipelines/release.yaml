@@ -123,9 +123,13 @@
     - NEXT_VERSION=$(grep -i 'the next release version is' release.log | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 || true)
     - echo "NEXT_VERSION=$NEXT_VERSION" >> build.env
     - CURRENT_VERSION=$(grep -i 'associated with version' release.log | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 || true)
-    - echo "CURRENT_VERSION=$CURRENT_VERSION" >> build.env
-    - MAKE_RELEASE=FALSE
-    - if grep 'There are no relevant changes, so no new version is released.' release.log; then MAKE_RELEASE="FALSE"; else MAKE_RELEASE="TRUE"; fi
+    - echo "CURRENT_VERSION=$CURRENT_VERSION" >> build.env 
+    - |
+      if grep -qi 'the next release version is' release.log; then 
+        echo "MAKE_RELEASE=TRUE" >> build.env
+      else 
+        echo "MAKE_RELEASE=FALSE" >> build.env
+      fi
     - echo "MAKE_RELEASE=$MAKE_RELEASE" >> build.env
   artifacts:
     paths:
