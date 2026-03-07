@@ -144,5 +144,3 @@
     - if [ -z "$CURRENT_VERSION" ]; then echo "Error - CURRENT_VERSION is not set or empty"; exit 1; fi
     - if [ -z "$NEXT_VERSION" ]; then echo "Error - NEXT_VERSION is not set or empty"; exit 1; fi
     - if [ -z "$MAKE_RELEASE" ]; then echo "Error - MAKE_RELEASE is not set or empty"; exit 1; fi
-
-    
