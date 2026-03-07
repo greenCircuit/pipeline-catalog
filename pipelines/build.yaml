@@ -1,37 +1,49 @@
 .create_image:
-  # image: registry.dev.local/home-lab/pipeline-catalog:latest
   image: quay.io/buildah/stable:latest
   stage: build
+  needs: ["release-dry-run"]
   variables:
     FILE_PATH: "Dockerfile"
     REGISTRY_PATH: ""
+    CURRENT_VERSION: "0.0.0"  # version on branch
+    NEXT_VERSION: "1.0.0"     # version on release
+    PUSH_LATEST: "true"
   script: | # shell
     echo "FILE_PATH:         ${FILE_PATH}"
     echo "REGISTRY_PATH:     ${REGISTRY_PATH}"
-
+    echo "CURRENT_VERSION:   ${CURRENT_VERSION}"
+    echo "NEXT_VERSION:      ${NEXT_VERSION}"
+    echo "PUSH_LATEST:       ${PUSH_LATEST}"
 
     if [[ "$CI_COMMIT_REF_NAME" = "$CI_DEFAULT_BRANCH" ]]; then
-      TAG="latest"
+      TAG="${NEXT_VERSION}"
     else
-      TAG=${CI_COMMIT_BRANCH}
+      TAG="${CI_COMMIT_BRANCH}"
     fi
 
-    if [[ $REGISTRY_PATH != "" ]]; then
+    if [[ "$REGISTRY_PATH" != "" ]]; then
       echo "pushing image to sub registry"
       CI_REGISTRY_IMAGE="${CI_REGISTRY_IMAGE}/${REGISTRY_PATH}"
     else  
       echo "uploading to root path of registry"    
     fi
 
-
     echo "IMG tag:         ${TAG}"
     echo "Registry:        ${CI_REGISTRY_IMAGE}"
     echo ====================================
-    cat ${FILE_PATH}
+    cat "${FILE_PATH}"
     echo ====================================
-    buildah login --tls-verify=false $CI_REGISTRY_IMAGE -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    
+    buildah login --tls-verify=false "$CI_REGISTRY_IMAGE" -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+    
     echo "Building the image..."
     buildah build -t "${CI_REGISTRY_IMAGE}:${TAG}" -f "${FILE_PATH}"
 
     echo "Pushing the image..."
-    buildah push --tls-verify=false  "${CI_REGISTRY_IMAGE}:${TAG}"
+    buildah push --tls-verify=false "${CI_REGISTRY_IMAGE}:${TAG}"
+
+    if [[ "$PUSH_LATEST" == "true" ]]; then
+      echo "Also tagging and pushing as latest..."
+      buildah tag "${CI_REGISTRY_IMAGE}:${TAG}" "${CI_REGISTRY_IMAGE}:latest"
+      buildah push --tls-verify=false "${CI_REGISTRY_IMAGE}:latest"
+    fi
