@@ -170,7 +170,6 @@
 publish-release:
   stage: release
   image: node:20
-  needs: ["release-dry-run"] 
   variables:
     GITLAB_TOKEN: "${CI_JOB_TOKEN}"
     GIT_DEPTH: "0"
@@ -178,6 +177,14 @@ publish-release:
     - git fetch --tags
     - npm install semantic-release @semantic-release/exec @semantic-release/git
   script:
+    # determining if need to create new version or not
+    - |
+      npx semantic-release --dry-run > release.log 2>&1 || true
+      cat release.log
+      if ! grep -qi 'the next release version is' release.log; then 
+        echo "Semantic-release determined no new version is required. Exiting cleanly."
+        exit 0
+      fi
     - echo "=== Preparing Custom Changelog Script ==="
     - |
       cat << 'EOF' > update-changelog.sh
@@ -194,4 +201,4 @@ publish-release:
     - echo "=== Executing Semantic Release ==="
     - npx semantic-release
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $MAKE_RELEASE == "TRUE"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
