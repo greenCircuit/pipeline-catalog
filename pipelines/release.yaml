@@ -114,7 +114,7 @@
       dotenv: semver.env
 
 .semantic-release-dry-run:
-  stage: version-check
+  stage: semver
   image: node:20
   variables:
     GIT_DEPTH: "0" 
