@@ -44,7 +44,7 @@
     echo "Pushing the image..."
     buildah push --tls-verify=false "${CI_REGISTRY_IMAGE}:${TAG}"
 
-    if [[ "$PUSH_LATEST" == "true" ]] && [[ "$MAKE_RELEASE" == "TRUE" ]]; then
+    if [[ "$PUSH_LATEST" == "TRUE" ]] && [[ "$MAKE_RELEASE" == "TRUE" ]]; then
       echo "Also tagging and pushing as latest..."
       buildah tag "${CI_REGISTRY_IMAGE}:${TAG}" "${CI_REGISTRY_IMAGE}:latest"
       buildah push --tls-verify=false "${CI_REGISTRY_IMAGE}:latest"

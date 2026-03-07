@@ -123,12 +123,12 @@
   stage: semver
   image: node:20
   before_script:
-    - npm install semantic-release
+    - npm install semantic-release @semantic-release/exec
   variables: 
     GIT_DEPTH: 0
   script: |
     # Run semantic-release and capture all output
-    npx semantic-release --dry-run > release.log 2>&1 || true
+    npx semantic-release --dry-run > release.log
     cat release.log
     
     # 1. Determine CURRENT_VERSION
@@ -166,39 +166,39 @@
     - if [ -z "$CURRENT_VERSION" ]; then echo "Error - CURRENT_VERSION is not set or empty"; exit 1; fi
     - if [ -z "$NEXT_VERSION" ]; then echo "Error - NEXT_VERSION is not set or empty"; exit 1; fi
     - if [ -z "$MAKE_RELEASE" ]; then echo "Error - MAKE_RELEASE is not set or empty"; exit 1; fi
- 
-publish-release:
-  stage: release
-  image: node:20
-  variables:
-    GITLAB_TOKEN: "${CI_JOB_TOKEN}"
-    GIT_DEPTH: "0"
-  before_script:
-    - git fetch --tags
-    - npm install semantic-release @semantic-release/exec @semantic-release/git
-  script:
-    # determining if need to create new version or not
-    - |
-      npx semantic-release --dry-run > release.log 2>&1 || true
-      cat release.log
-      if ! grep -qi 'the next release version is' release.log; then 
-        echo "Semantic-release determined no new version is required. Exiting cleanly."
-        exit 0
-      fi
-    - echo "=== Preparing Custom Changelog Script ==="
-    - |
-      cat << 'EOF' > update-changelog.sh
-      #!/bin/bash
-      VERSION=$1
-      echo "## ${VERSION} - ${CI_COMMIT_MESSAGE}" >> CHANGELOG.md
-      echo "$(date '+%Y-%m-%d')" >> CHANGELOG.md
-      echo "- Commit URL: http://gitlab.dev.local/${CI_PROJECT_PATH}/-/tree/${CI_COMMIT_SHA}" >> CHANGELOG.md
-      echo "- Pipeline: ${CI_PIPELINE_URL}" >> CHANGELOG.md
-      echo "<br>" >> CHANGELOG.md
-      echo "" >> CHANGELOG.md
-      EOF
-    - chmod +x update-changelog.sh
-    - echo "=== Executing Semantic Release ==="
-    - npx semantic-release
-  rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+#publish-release:
+  #stage: release
+  #image: node:20
+  #variables:
+    #GITLAB_TOKEN: "${CI_JOB_TOKEN}"
+    #GIT_DEPTH: "0"
+  #before_script:
+    #- git fetch --tags
+    #- npm install semantic-release @semantic-release/exec @semantic-release/git
+  #script:
+    ## determining if need to create new version or not
+    #- |
+      #npx semantic-release --dry-run > release.log 2>&1 || true
+      #cat release.log
+      #if ! grep -qi 'the next release version is' release.log; then 
+        #echo "Semantic-release determined no new version is required. Exiting cleanly."
+        #exit 0
+      #fi
+    #- echo "=== Preparing Custom Changelog Script ==="
+    #- |
+      #cat << 'EOF' > update-changelog.sh
+      ##!/bin/bash
+      #VERSION=$1
+      #echo "## ${VERSION} - ${CI_COMMIT_MESSAGE}" >> CHANGELOG.md
+      #echo "$(date '+%Y-%m-%d')" >> CHANGELOG.md
+      #echo "- Commit URL: http://gitlab.dev.local/${CI_PROJECT_PATH}/-/tree/${CI_COMMIT_SHA}" >> CHANGELOG.md
+      #echo "- Pipeline: ${CI_PIPELINE_URL}" >> CHANGELOG.md
+      #echo "<br>" >> CHANGELOG.md
+      #echo "" >> CHANGELOG.md
+      #EOF
+    #- chmod +x update-changelog.sh
+    #- echo "=== Executing Semantic Release ==="
+    #- npx semantic-release
+  #rules:
+    #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
