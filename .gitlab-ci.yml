@@ -62,6 +62,9 @@ git-leaks:
 release-dry-run:
   extends: .semantic-release-dry-run
 
+test-release-dry-run: 
+  extends: .test-release
+
 
 
 # semver-dry-run:

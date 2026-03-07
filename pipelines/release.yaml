@@ -129,3 +129,14 @@
     - release.log
     reports:
       dotenv: build.env
+
+.test-release:
+  stage: semver 
+  image: alpine:latest
+  needs: ["release-dry-run"]
+  script:
+    - echo "The current deployed version is $CURRENT_VERSION"
+    - echo "We are building version $NEXT_VERSION"
+    # Check if variables are empty and exit if they are
+    - if [ -z "$CURRENT_VERSION" ]; then echo "Error - CURRENT_VERSION is not set or empty"; exit 1; fi
+    - if [ -z "$NEXT_VERSION" ]; then echo "Error - NEXT_VERSION is not set or empty"; exit 1; fi
