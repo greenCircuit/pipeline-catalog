@@ -49,3 +49,4 @@
       buildah tag "${CI_REGISTRY_IMAGE}:${TAG}" "${CI_REGISTRY_IMAGE}:latest"
       buildah push --tls-verify=false "${CI_REGISTRY_IMAGE}:latest"
     fi
+    
