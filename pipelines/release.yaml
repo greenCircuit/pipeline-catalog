@@ -130,7 +130,6 @@
       else 
         echo "MAKE_RELEASE=FALSE" >> build.env
       fi
-    - echo "MAKE_RELEASE=$MAKE_RELEASE" >> build.env
   artifacts:
     paths:
     - release.log
