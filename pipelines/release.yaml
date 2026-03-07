@@ -113,3 +113,30 @@
     reports:
       dotenv: semver.env
 
+.semantic-release-dry-run:
+  stage: semver
+  image: node:20
+  variables:
+  before_script:
+    - npm install -g semantic-release @semantic-release/gitlab
+  script:
+    # 1. Run semantic-release in dry-run mode and save output to a log file
+    - npx semantic-release --dry-run > release.log || true
+    - cat release.log
+    
+    - CURRENT_VERSION=$(grep -E 'associated with version' release.log | sed -E 's/.*associated with version ([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+    # Fallback to 0.0.0 if semantic-release reports "No previous release found"
+    - if [ -z "$CURRENT_VERSION" ]; then CURRENT_VERSION="0.0.0"; fi
+    - echo "CURRENT_VERSION=$CURRENT_VERSION" >> build.env
+    - NEXT_VERSION=$(grep -i "The next release version is" release.log | sed -E 's/.*is ([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+    
+    # 4. Fallback: If no new release is triggered by recent commits, default to the current version
+    - if [ -z "$NEXT_VERSION" ]; then NEXT_VERSION="0.0.0"; fi
+    - echo "NEXT_VERSION=$NEXT_VERSION" >> build.env
+    - echo "CURRENT_VERSION=$CURRENT_VERSION" >> build.env
+    - echo "=== Exported Variables ==="
+    - cat build.env
+  artifacts:
+    reports:
+      # This exposes the file's contents as variables to downstream jobs
+      dotenv: build.env

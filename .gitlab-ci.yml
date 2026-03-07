@@ -59,6 +59,11 @@ failing-helm:
 git-leaks:
   extends: .secrets_scan
 
+release-dry-run:
+  extends: .semantic-release-dry-run
+
+
+
 # semver-dry-run:
 #   variables:
 #     GIT_DEPTH: "0" 
