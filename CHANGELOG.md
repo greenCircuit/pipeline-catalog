@@ -43,3 +43,10 @@ Changelog pipeline is working
 - Pipeline: http://gitlab.dev.local/home-lab/pipeline-catalog/-/pipelines/287
 <br>
 
+## 1.1.4 - fix: building images with tags that contain release tag
+
+2026-03-07
+- Commit URL: http://gitlab.dev.local/home-lab/pipeline-catalog/-/tree/3bf0e982bdd5a6ac45b46f0b3f0b12277d975388
+- Pipeline: http://gitlab.dev.local/home-lab/pipeline-catalog/-/pipelines/289
+<br>
+
