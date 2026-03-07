@@ -113,7 +113,7 @@
     reports:
       dotenv: semver.env
 
-release-dry-run:
+.semantic-release-dry-run:
   stage: version-check
   image: node:20
   variables:
