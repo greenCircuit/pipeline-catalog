@@ -123,7 +123,7 @@
   stage: semver
   image: node:20
   before_script:
-    - npm install semantic-release @semantic-release/exec
+    - npm install semantic-release @semantic-release/exec @semantic-release/git @semantic-release/gitlab
   variables: 
     GIT_DEPTH: 0
   script: |
@@ -176,6 +176,7 @@
   #before_script:
     #- git fetch --tags
     #- npm install semantic-release @semantic-release/exec @semantic-release/git
+    #- npm install semantic-release @semantic-release/exec @semantic-release/git @semantic-release/gitlab
   #script:
     ## determining if need to create new version or not
     #- |
