@@ -5,20 +5,22 @@
   variables:
     FILE_PATH: "Dockerfile"
     REGISTRY_PATH: ""
-    CURRENT_VERSION: "0.0.0"  # version on branch
-    NEXT_VERSION: "1.0.0"     # version on release
-    PUSH_LATEST: "true"
+    CURRENT_VERSION: "0.0.0"
+    NEXT_VERSION: "1.0.0"
+    PUSH_LATEST: "TRUE" 
+    MAKE_RELEASE: "TRUE"
   script: | # shell
     echo "FILE_PATH:         ${FILE_PATH}"
     echo "REGISTRY_PATH:     ${REGISTRY_PATH}"
     echo "CURRENT_VERSION:   ${CURRENT_VERSION}"
     echo "NEXT_VERSION:      ${NEXT_VERSION}"
     echo "PUSH_LATEST:       ${PUSH_LATEST}"
+    echo "MAKE_RELEASE:      ${MAKE_RELEASE}"
 
-    if [[ "$CI_COMMIT_REF_NAME" = "$CI_DEFAULT_BRANCH" ]]; then
+    if [[ "$CI_COMMIT_REF_NAME" = "$CI_DEFAULT_BRANCH" ]] && [[ "$MAKE_RELEASE" == "TRUE" ]]; then  
       TAG="${NEXT_VERSION}"
     else
-      TAG="${CI_COMMIT_BRANCH}"
+      TAG="${CURRENT_VERSION}-${CI_COMMIT_BRANCH}"
     fi
 
     if [[ "$REGISTRY_PATH" != "" ]]; then
@@ -42,7 +44,7 @@
     echo "Pushing the image..."
     buildah push --tls-verify=false "${CI_REGISTRY_IMAGE}:${TAG}"
 
-    if [[ "$PUSH_LATEST" == "true" ]]; then
+    if [[ "$PUSH_LATEST" == "true" ]] && [[ "$MAKE_RELEASE" == "TRUE" ]]; then
       echo "Also tagging and pushing as latest..."
       buildah tag "${CI_REGISTRY_IMAGE}:${TAG}" "${CI_REGISTRY_IMAGE}:latest"
       buildah push --tls-verify=false "${CI_REGISTRY_IMAGE}:latest"
