@@ -116,7 +116,7 @@
 .semantic-release-dry-run:
   stage: semver
   image: node:20
-  before_script:
+  script:
     - npm install semantic-release @semantic-release/commit-analyzer
     - npx semantic-release --dry-run > release.log || true
     - cat release.log
