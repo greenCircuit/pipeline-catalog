@@ -36,3 +36,10 @@ Changelog pipeline is working
 - Pipeline: http://gitlab.dev.local/homelab/pipeline-catalog/-/pipelines/368
 <br>
 
+## 1.1.3 - fix: generating release
+
+2026-03-07
+- Commit URL: http://gitlab.dev.local/home-lab/pipeline-catalog/-/tree/8814528854ac5e8f3ff4d7da8632f2a05bb29ef6
+- Pipeline: http://gitlab.dev.local/home-lab/pipeline-catalog/-/pipelines/287
+<br>
+
