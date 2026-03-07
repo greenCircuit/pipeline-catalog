@@ -1,3 +1,4 @@
+tagFormat: "${version}"
 plugins:
   - "@semantic-release/commit-analyzer"
   - ["@semantic-release/exec", {
@@ -9,4 +10,3 @@ plugins:
       "assets": ["CHANGELOG.md"],
       "message": "chore(release): bump version to ${nextRelease.version} [skip ci]"
     }]
-tagFormat: "${version}"
