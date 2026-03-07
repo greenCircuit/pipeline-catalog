@@ -118,9 +118,6 @@
   image: node:20
   before_script:
     - npm install semantic-release @semantic-release/commit-analyzer
-    - >
-      echo '{"plugins":["@semantic-release/commit-analyzer"], "tagFormat": "$${version}"}' > .releaserc.json  script:
-    # 1. Run semantic-release in dry-run mode and save output to a log file
     - npx semantic-release --dry-run > release.log || true
     - cat release.log
     # - CURRENT_VERSION=$(grep -E 'associated with version' release.log | sed -E 's/.*associated with version ([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
