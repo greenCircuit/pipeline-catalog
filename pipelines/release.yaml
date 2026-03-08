@@ -149,7 +149,7 @@
     echo "NEXT_VERSION=$NEXT_VERSION" >> build.env
 
     # this will point always to new version if release is available or a current version where there is no release 
-    BUILD_VERSION=$NEXT_VERSION"
+    BUILD_VERSION=$NEXT_VERSION
     echo "BUILD_VERSION=$BUILD_VERSION" >> build.env
 
     echo "=== Exported Variables ==="
