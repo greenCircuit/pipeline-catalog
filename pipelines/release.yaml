@@ -124,8 +124,6 @@
   image: node:20
   before_script:
     - npm install semantic-release @semantic-release/exec @semantic-release/git @semantic-release/gitlab
-  variables: 
-    GIT_DEPTH: 0
   script: |
     # Run semantic-release and capture all output
     npx semantic-release --dry-run > release.log
