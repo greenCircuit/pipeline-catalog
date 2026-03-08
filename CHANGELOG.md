@@ -50,3 +50,10 @@ Changelog pipeline is working
 - Pipeline: http://gitlab.dev.local/home-lab/pipeline-catalog/-/pipelines/289
 <br>
 
+## 1.1.5 - fix: use BUILS_VERSION for build versions, adding release job to pipeline
+
+2026-03-08
+- Commit URL: http://gitlab.dev.local/home-lab/pipeline-catalog/-/tree/efc13082b1b01edfffe9ed0fbd70154916aea502
+- Pipeline: http://gitlab.dev.local/home-lab/pipeline-catalog/-/pipelines/296
+<br>
+
