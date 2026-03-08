@@ -48,7 +48,7 @@ failing-helm:
       - "test-data/helm/wrong-template"
   allow_failure: true
 
-# testing img creation that correct tag is created
+# testing img building that correct tag is created
 img-base:
   extends: .create_image
   stage: unit-test
@@ -59,8 +59,12 @@ img-base:
 git-leaks:
   extends: .secrets_scan
 
+# releases jobs
 release-dry-run:
   extends: .semantic-release-dry-run
 
 test-release-dry-run: 
   extends: .test-release
+
+create-release: 
+  extends: .publish-release
