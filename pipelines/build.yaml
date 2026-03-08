@@ -5,22 +5,20 @@
   variables:
     FILE_PATH: "Dockerfile"
     REGISTRY_PATH: ""
-    CURRENT_VERSION: "0.0.0"
-    NEXT_VERSION: "1.0.0"
+    BUILD_VERSION: "0.0.0"
     PUSH_LATEST: "TRUE" 
     MAKE_RELEASE: "TRUE"
   script: | # shell
     echo "FILE_PATH:         ${FILE_PATH}"
     echo "REGISTRY_PATH:     ${REGISTRY_PATH}"
-    echo "CURRENT_VERSION:   ${CURRENT_VERSION}"
-    echo "NEXT_VERSION:      ${NEXT_VERSION}"
+    echo "BUILD_VERSION:     ${BUILD_VERSION}"
     echo "PUSH_LATEST:       ${PUSH_LATEST}"
     echo "MAKE_RELEASE:      ${MAKE_RELEASE}"
 
     if [[ "$CI_COMMIT_REF_NAME" = "$CI_DEFAULT_BRANCH" ]] && [[ "$MAKE_RELEASE" == "TRUE" ]]; then  
-      TAG="${NEXT_VERSION}"
+      TAG="${BUILD_VERSION}"
     else
-      TAG="${CURRENT_VERSION}-${CI_COMMIT_BRANCH}"
+      TAG="${BUILD_VERSION}-${CI_COMMIT_BRANCH}"
     fi
 
     if [[ "$REGISTRY_PATH" != "" ]]; then
