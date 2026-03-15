@@ -1,6 +1,7 @@
 .check-manifests:
   stage: unit-test
-  image: registry.dev.local/home-lab/pipeline-catalog/k8s:latest
+  # image: registry.dev.local/home-lab/pipeline-catalog/k8s:latest
+  image: registry.dev.local/home-lab/pipeline-catalog/k8s:k8s:1.1.5-main
   variables:
     CHECK_PATH: ""
     EXTRA_ARGS: "--ignore-missing-schemas"
@@ -25,7 +26,8 @@
 
 .check-helm:
   stage: unit-test
-  image: registry.dev.local/home-lab/pipeline-catalog/k8s:latest
+  # image: registry.dev.local/home-lab/pipeline-catalog/k8s:latest
+  image: registry.dev.local/home-lab/pipeline-catalog/k8s:k8s:1.1.5-main
   variables:
     CHECK_PATH: ""
   script: | #shell
