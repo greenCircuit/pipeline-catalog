@@ -23,14 +23,18 @@ img-k8s:
     FILE_PATH: "containerfiles/Dockerfile.k8s"
     REGISTRY_PATH: "k8s"
   rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: never
     - changes: ["containerfiles/Dockerfile.k8s"]
-    
+
 semver-img:
   extends: .create_image
   variables:
     FILE_PATH: "containerfiles/Dockerfile.semver"
     REGISTRY_PATH: "semver"
   rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: never
     - changes: ["containerfiles/Dockerfile.semver"]
 
 
