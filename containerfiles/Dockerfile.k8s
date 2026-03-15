@@ -14,3 +14,4 @@ RUN curl -fsSL https://github.com/datreeio/CRDs-catalog/archive/refs/heads/main.
       | tar -xz -C /tmp && \
     mv /tmp/CRDs-catalog-main /crd-catalog && \
     rm -rf /crd-catalog/.github /crd-catalog/README.md
+    
