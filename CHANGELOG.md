@@ -57,3 +57,10 @@ Changelog pipeline is working
 - Pipeline: http://gitlab.dev.local/home-lab/pipeline-catalog/-/pipelines/296
 <br>
 
+## 1.2.0 - feat: adding schema validation for custom resources
+
+2026-03-15
+- Commit URL: http://gitlab.dev.local/home-lab/pipeline-catalog/-/tree/c8c8ddc99295cae1d7b651b7404defc3760265c1
+- Pipeline: http://gitlab.dev.local/home-lab/pipeline-catalog/-/pipelines/311
+<br>
+
