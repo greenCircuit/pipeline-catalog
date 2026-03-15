@@ -3,6 +3,7 @@ FROM node:20-alpine
 RUN npm install -g \
     semantic-release \
     @semantic-release/gitlab \
+    @semantic-release/git \
     @semantic-release/exec \
     @semantic-release/commit-analyzer \
     @semantic-release/release-notes-generator \
