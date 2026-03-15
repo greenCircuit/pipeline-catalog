@@ -9,7 +9,7 @@
     echo "CHECK_PATH: ${CHECK_PATH}"
     /kubeconform --verbose --summary --output json ${EXTRA_ARGS} \
       -schema-location default \
-      -schema-location '/crd-catalog/{{ .Group }}/{{ .ResourceKind }}_{{ .Version }}.json' \
+      -schema-location '/crd-catalog/{{ .Group }}/{{ .ResourceKind }}_{{ .ResourceAPIVersion }}.json' \
       -- ${CHECK_PATH}/*.yaml > "report.json" || true
     echo "=============="
     cat report.json
@@ -39,7 +39,7 @@
     cat generated.yaml
     /kubeconform --verbose --summary --output json --ignore-missing-schemas \
       -schema-location default \
-      -schema-location '/crd-catalog/{{ .Group }}/{{ .ResourceKind }}_{{ .Version }}.json' \
+      -schema-location '/crd-catalog/{{ .Group }}/{{ .ResourceKind }}_{{ .ResourceAPIVersion }}.json' \
       -- generated.yaml > "report.json" || true
     echo "=============="
     cat report.json
