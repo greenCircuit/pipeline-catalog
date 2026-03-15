@@ -1,3 +1,28 @@
+.check-manifests:
+  stage: unit-test
+  image: registry.dev.local/home-lab/pipeline-catalog/k8s:latest
+  variables:
+    CHECK_PATH: ""
+    EXTRA_ARGS: "--ignore-missing-schemas"
+  script: |
+    echo "CHECK_PATH: ${CHECK_PATH}"
+    /kubeconform --verbose --summary --output json ${EXTRA_ARGS} \
+      -schema-location default \
+      -schema-location '/crd-catalog/{{ .Group }}/{{ .ResourceKind }}_{{ .Version }}.json' \
+      -- ${CHECK_PATH}/*.yaml > "report.json" || true
+    echo "=============="
+    cat report.json
+    if [[ "$(jq '.summary.errors' report.json)" != "0" || "$(jq '.summary.invalid' report.json)" != "0" ]]; then
+      echo "🚨 Validation failed"
+      exit 1
+    else
+      echo "✅ Validation passed"
+    fi
+  artifacts:
+    paths:
+      - report.json
+    expire_in: 1 week
+
 .check-helm:
   stage: unit-test
   image: registry.dev.local/home-lab/pipeline-catalog/k8s:latest
@@ -10,7 +35,10 @@
     cd $CHECK_PATH
     helm template --debug . > generated.yaml
     cat generated.yaml
-    /kubeconform --verbose --summary --output json --ignore-missing-schemas -- generated.yaml > "report.json" || true
+    /kubeconform --verbose --summary --output json --ignore-missing-schemas \
+      -schema-location default \
+      -schema-location '/crd-catalog/{{ .Group }}/{{ .ResourceKind }}_{{ .Version }}.json' \
+      -- generated.yaml > "report.json" || true
     echo "=============="
     cat report.json
     if [[ "$(jq '.summary.errors' report.json)" != "0" || "$(jq '.summary.invalid' report.json)" != "0" ]]; then

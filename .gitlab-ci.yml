@@ -4,13 +4,17 @@ variables:
 
 
 include:
+  # pipeline jobs 
   - pipelines/stages.yaml
   - pipelines/build.yaml
   - pipelines/k8s.yaml
   - pipelines/security.yaml
   - pipelines/template.yml
   - pipelines/release.yaml
+  # tests for pipeline jobs
+  - test-data/test-pipelines/test-k8s.yaml
 
+    
 # running all pipelines in order to validate them
 # Creating pipeline images
 img-k8s:
@@ -29,24 +33,6 @@ semver-img:
   rules:
     - changes: ["containerfiles/Dockerfile.semver"]
 
-# these helm charts should pass
-passing-helm:
-  extends: .check-helm
-  parallel:
-    matrix: 
-    - CHECK_PATH: 
-      - "test-data/helm/correct-hc"
-      - "test-data/helm/crd-chart"
-
-# these helm chart should fail
-failing-helm:
-  extends: .check-helm
-  parallel:
-    matrix: 
-    - CHECK_PATH: 
-      - "test-data/helm/wrong-spec"
-      - "test-data/helm/wrong-template"
-  allow_failure: true
 
 # testing img building that correct tag is created
 img-base:

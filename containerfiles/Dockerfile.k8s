@@ -1,5 +1,5 @@
 FROM ghcr.io/yannh/kubeconform:latest-alpine
-RUN apk add curl \ 
+RUN apk add curl \
             openssl \
             bash \
             git \
@@ -8,3 +8,9 @@ RUN apk add curl \
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 RUN chmod 700 get_helm.sh
 RUN ./get_helm.sh
+
+# CRDs-catalog covers FluxCD, cert-manager, Istio, and hundreds of other CRDs
+RUN curl -fsSL https://github.com/datreeio/CRDs-catalog/archive/refs/heads/main.tar.gz \
+      | tar -xz -C /tmp && \
+    mv /tmp/CRDs-catalog-main /crd-catalog && \
+    rm -rf /crd-catalog/.github /crd-catalog/README.md

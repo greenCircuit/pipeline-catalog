@@ -1,0 +1,38 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: my-app-gateway
+  namespace: default
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: my-app-tls
+      hosts:
+        - my-app.example.com
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: my-app
+  namespace: default
+spec:
+  hosts:
+    - my-app.example.com
+  gateways:
+    - my-app-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: my-app
+            port:
+              number: 80

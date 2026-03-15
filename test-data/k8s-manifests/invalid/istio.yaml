@@ -1,0 +1,12 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: bad-vs
+  namespace: default
+spec:
+  hosts: "should-be-a-list-not-a-string"
+  http:
+    - route:
+        - destination:
+            host: my-app
+            port: "should-be-an-object-not-a-string"

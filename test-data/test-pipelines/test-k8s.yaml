@@ -1,0 +1,39 @@
+## Testing schema validations inside helm charts
+# these helm charts should pass
+passing-helm:
+  extends: .check-helm
+  parallel:
+    matrix: 
+    - CHECK_PATH: 
+      - "test-data/helm/correct-hc"
+      - "test-data/helm/crd-chart"
+
+# these helm chart should fail
+failing-helm:
+  extends: .check-helm
+  parallel:
+    matrix: 
+    - CHECK_PATH: 
+      - "test-data/helm/wrong-spec"
+      - "test-data/helm/wrong-template"
+  allow_failure: true
+
+## Test CRD schema validation for FluxCD, cert-manager, Istio, Prometheus Operator
+passing-manifests:
+  extends: .check-manifests
+  variables:
+    EXTRA_ARGS: ""
+  parallel:
+    matrix:
+      - CHECK_PATH:
+        - "test-data/k8s-manifests/valid"
+
+failing-manifests:
+  extends: .check-manifests
+  variables:
+    EXTRA_ARGS: ""
+  parallel:
+    matrix:
+      - CHECK_PATH:
+        - "test-data/k8s-manifests/invalid"
+  allow_failure: true

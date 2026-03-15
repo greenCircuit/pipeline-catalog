@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: bad-release
+  namespace: default
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: my-app
+      sourceRef:
+        kind: HelmRepository
+        name: my-repo
+        namespace: flux-system
+  unknownField: this-should-fail
+  values:
+    invalidNested:
+      - notAllowed: true
