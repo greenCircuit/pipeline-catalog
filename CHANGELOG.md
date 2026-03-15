@@ -64,3 +64,10 @@ Changelog pipeline is working
 - Pipeline: http://gitlab.dev.local/home-lab/pipeline-catalog/-/pipelines/311
 <br>
 
+## 1.2.1 - Merge branch 'main' of https://gitlab.dev.io/home-lab/pipeline-catalog
+
+2026-03-15
+- Commit URL: http://gitlab.dev.local/home-lab/pipeline-catalog/-/tree/1ceaac9856edfa832ecbe23ba43975e51f1490b6
+- Pipeline: http://gitlab.dev.local/home-lab/pipeline-catalog/-/pipelines/319
+<br>
+
