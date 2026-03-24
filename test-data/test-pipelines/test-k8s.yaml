@@ -37,3 +37,24 @@ failing-manifests:
       - CHECK_PATH:
         - "test-data/k8s-manifests/invalid"
   allow_failure: true
+
+## Test kustomization.yaml schema validation
+passing-kustomization:
+  extends: .check-manifests
+  variables:
+    EXTRA_ARGS: ""
+  parallel:
+    matrix:
+      - CHECK_PATH:
+        - "test-data/k8s-manifests/kustomization/valid"
+
+failing-kustomization:
+  extends: .check-manifests
+  variables:
+    EXTRA_ARGS: ""
+  parallel:
+    matrix:
+      - CHECK_PATH:
+        - "test-data/k8s-manifests/kustomization/missing-manifests"
+        - "test-data/k8s-manifests/kustomization/wrong-spec"
+  allow_failure: true

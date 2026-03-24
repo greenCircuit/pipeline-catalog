@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: my-app
+resources:
+  - deployment.yaml
+# commonLabels must be a map, not a list
+commonLabels:
+  - app=my-app
+  - env=production
+# images entries require a name field
+images:
+  - newTag: "1.25.0"
