@@ -20,4 +20,4 @@ RUN curl -fsSL https://github.com/datreeio/CRDs-catalog/archive/refs/heads/main.
 RUN mkdir -p /crd-catalog/kustomize.config.k8s.io && \
     curl -fsSL https://json.schemastore.org/kustomization.json \
       -o /crd-catalog/kustomize.config.k8s.io/kustomization_v1beta1.json
-    
+ 
