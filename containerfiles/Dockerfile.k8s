@@ -14,4 +14,10 @@ RUN curl -fsSL https://github.com/datreeio/CRDs-catalog/archive/refs/heads/main.
       | tar -xz -C /tmp && \
     mv /tmp/CRDs-catalog-main /crd-catalog && \
     rm -rf /crd-catalog/.github /crd-catalog/README.md
+
+# kustomize.config.k8s.io is not a cluster CRD so it's absent from CRDs-catalog;
+# add the schema from SchemaStore so kubeconform can validate kustomization.yaml files
+RUN mkdir -p /crd-catalog/kustomize.config.k8s.io && \
+    curl -fsSL https://json.schemastore.org/kustomization.json \
+      -o /crd-catalog/kustomize.config.k8s.io/kustomization_v1beta1.json
     
